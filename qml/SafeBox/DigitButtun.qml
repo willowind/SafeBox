@@ -5,7 +5,7 @@ Rectangle {
     id: digitButtun
     width: 80
     height: 40
-    color: "#A20013"
+    color: "#1ABC9C"
 
     property alias text: digitText.text
 

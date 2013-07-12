@@ -1,5 +1,7 @@
 #include <QtGui/QApplication>
 #include "qmlapplicationviewer.h"
+#include <QDeclarativeEngine>
+#include <QtDebug>
 
 Q_DECL_EXPORT int main(int argc, char *argv[])
 {
@@ -10,6 +12,9 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 //    viewer.setMainQmlFile(QLatin1String("qml/SafeBox/StartEncryptionFace.qml"));
     viewer.setMainQmlFile(QLatin1String("qml/SafeBox/MainCategories.qml"));
     viewer.showExpanded();
+
+    QDeclarativeEngine engine;
+    qDebug() << engine.offlineStoragePath();
 
     return app->exec();
 }

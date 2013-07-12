@@ -1,5 +1,6 @@
 // import QtQuick 1.0 // to target S60 5th Edition or Maemo 5
 import QtQuick 1.1
+import "databaseOperation.js" as StoreDB
 
 Rectangle {
     id:categoriesRectangle
@@ -9,19 +10,16 @@ Rectangle {
     ListModel {
         id:categoriesListModel
 
-        ListElement {
-            icon: "icon"
-            name: "name"
-        }
+        Component.onCompleted: {
+            StoreDB.initializeTable("main_categories_table");
 
-        ListElement {
-            icon: "icon-1"
-            name: "name-1"
-        }
+//            StoreDB.insertOrUpdateValue("main_categories_table" , "emails_table" , "Emails");
 
-        ListElement {
-            icon: "icon-1"
-            name: "name-1"
+//            StoreDB.insertOrUpdateValue("main_categories_table" , "network_disk_table" , "Network Disk");
+
+//            StoreDB.insertOrUpdateValue("main_categories_table" , "websites_table" , "Websites");
+
+            StoreDB.getAllValue("main_categories_table");
         }
     }
 
@@ -29,12 +27,20 @@ Rectangle {
         id:categoriesDelegate
         CategoriesItem {
             id:item
-            text: name
+            text: showText
         }
     }
 
     ListView {
         id:categoriesListView
+//        z: 0
+        anchors.fill: parent
+        spacing: 5
+//        highlight: CategoriesItem {
+//            color: "#9F0000";
+//        }
+//        focus: true
+
         model: categoriesListModel
         delegate: categoriesDelegate
     }

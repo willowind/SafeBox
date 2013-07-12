@@ -72,7 +72,7 @@ Rectangle {
             anchors.fill: parent
             cellWidth: 90
             cellHeight: 50
-            highlight: digitHighlight
+//            highlight: digitHighlight
             model: digitModel
             delegate: digitDelegate
         }

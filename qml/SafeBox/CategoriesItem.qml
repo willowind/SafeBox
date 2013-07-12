@@ -1,14 +1,16 @@
 // import QtQuick 1.0 // to target S60 5th Edition or Maemo 5
 import QtQuick 1.1
 
+
 Rectangle {
     id:itemRectangle
     width: 300
     height: 80
-    color: "#000013"
+    color: "#2DB8B7"
 
     property alias text: showText.text
     property alias image: icomImage
+    property alias color: itemRectangle.color
 
     signal moreRectangleClicked()
     signal itemClicked()
@@ -19,7 +21,7 @@ Rectangle {
         y: 9
         width: 53
         height: 59
-        source: "qrc:/qtquickplugin/images/template_image.png"
+//        source: "qrc:/qtquickplugin/images/template_image.png"
     }
 
     Text {
@@ -48,7 +50,7 @@ Rectangle {
             y: 9
             width: 41
             height: 59
-            source: "qrc:/qtquickplugin/images/template_image.png"
+//            source: "qrc:/qtquickplugin/images/template_image.png"
         }
 
         MouseArea {
