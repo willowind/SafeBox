@@ -22,19 +22,39 @@ function initializeTable(table) {
         function(tx) {
             // 如果main_categories_table表不存在，则创建一个
             // 如果表存在，则跳过此步
-            var tmpCMD = "CREATE TABLE IF NOT EXISTS {0}(tableName TEXT , showTableName TEXT);";
+            var tmpCMD = "CREATE TABLE IF NOT EXISTS {0}(item0 TEXT , item1 TEXT , item2 TEXT , item3 TEXT , item4 TEXT , item5 TEXT , item6 TEXT , item7 TEXT , item8 TEXT , item9 TEXT);";
+
             var cmd = String.format(tmpCMD , table);
+
             tx.executeSql(cmd);
       });
 }
 
 // 插入数据
-function insertOrUpdateValue(table , item , value) {
+function insertOrUpdateValue(table , tableItems) {
    var db = getDatabase();
    var res = "";
    db.transaction(function(tx) {
-        var tmpcmd = 'INSERT OR REPLACE INTO {0} VALUES("{1}" , "{2}");'
-        var cmd = String.format(tmpcmd , table , item , value);
+        var tmpcmd = 'INSERT OR REPLACE INTO {0} VALUES("{1}"';
+
+        var i;
+        for(i in tableItems)
+        {
+            if(i == 0)
+                continue;
+
+            var t = ' , "{0}"';
+            var tt = String.format(t , tableItems[i]);
+            tmpcmd += tt;
+        }
+
+        for(i++; i < 10 ; i++)
+            tmpcmd += ' , "NULL"';
+
+        tmpcmd += ");";
+
+        var cmd = String.format(tmpcmd , table , tableItems[0]);
+
         var rs = tx.executeSql(cmd);
         if (rs.rowsAffected > 0)
             res = "OK";
@@ -71,7 +91,7 @@ function getSetting(setting) {
   return res
 }
 
-function getAllValue(table) {
+function getTableAllValueAndAppendToModel(table , model) {
     var db = getDatabase();
     db.transaction(
         function(tx) {
@@ -83,9 +103,17 @@ function getAllValue(table) {
             for(var i = 0 ; i < rs.rows.length ; i++)
             {
                 var myItem = rs.rows.item(i);
-                categoriesListModel.append({
-                                   "tableName" : myItem.tableName,
-                                   "showText" : myItem.showTableName
+                model.append({
+                                 "modelDataItem0" : myItem.item0,
+                                 "modelDataItem1" : myItem.item1,
+                                 "modelDataItem2" : myItem.item2,
+                                 "modelDataItem3" : myItem.item3,
+                                 "modelDataItem4" : myItem.item4,
+                                 "modelDataItem5" : myItem.item5,
+                                 "modelDataItem6" : myItem.item6,
+                                 "modelDataItem7" : myItem.item7,
+                                 "modelDataItem8" : myItem.item8,
+                                 "modelDataItem9" : myItem.item9,
                                });
             }
         }

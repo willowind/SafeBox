@@ -11,15 +11,20 @@ Rectangle {
         id:categoriesListModel
 
         Component.onCompleted: {
-            StoreDB.initializeTable("main_categories_table");
+//            StoreDB.initializeTable("main_categories_table");
 
-//            StoreDB.insertOrUpdateValue("main_categories_table" , "emails_table" , "Emails");
+//            var items = new Array("emails_table" , "Emails");
+//            StoreDB.insertOrUpdateValue("main_categories_table" , items);
 
-//            StoreDB.insertOrUpdateValue("main_categories_table" , "network_disk_table" , "Network Disk");
+//            items[0] = "network_disk_table";
+//            items[1] = "Network Disk";
+//            StoreDB.insertOrUpdateValue("main_categories_table" , items);
 
-//            StoreDB.insertOrUpdateValue("main_categories_table" , "websites_table" , "Websites");
+//            items[0] = "websites_table";
+//            items[1] = "Websites";
+//            StoreDB.insertOrUpdateValue("main_categories_table" , items);
 
-            StoreDB.getAllValue("main_categories_table");
+            StoreDB.getTableAllValueAndAppendToModel("main_categories_table" , categoriesListModel);
         }
     }
 
@@ -27,7 +32,7 @@ Rectangle {
         id:categoriesDelegate
         CategoriesItem {
             id:item
-            text: showText
+            text: modelDataItem1
         }
     }
 
