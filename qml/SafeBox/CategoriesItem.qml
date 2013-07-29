@@ -7,13 +7,27 @@ Rectangle {
     width: 300
     height: 80
     color: "#2DB8B7"
+    border.color: "green"
+    border.width: 2
 
     property alias text: showText.text
     property alias image: icomImage
     property alias color: itemRectangle.color
 
+    property string tableName: ""
+    property string showName: showText.text
+    property string data1: ""
+    property string data2: ""
+    property string data3: ""
+    property string data4: ""
+    property string data5: ""
+    property string data6: ""
+    property string data7: ""
+    property string data8: ""
+
     signal moreRectangleClicked()
     signal itemClicked()
+
 
     Image {
         id: icomImage
@@ -52,17 +66,5 @@ Rectangle {
             height: 59
 //            source: "qrc:/qtquickplugin/images/template_image.png"
         }
-
-        MouseArea {
-            id: moreMouseArea
-            anchors.fill: parent
-            onClicked: itemRectangle.moreRectangleClicked()
-        }
-    }
-
-    MouseArea {
-        id: itemMouseArea
-        anchors.fill: parent
-        onClicked: itemRectangle.itemClicked()
     }
 }

@@ -3,38 +3,39 @@ import QtQuick 1.1
 import "databaseOperation.js" as StoreDB
 
 Rectangle {
-    id:categoriesRectangle
+    id:minorRectangle
     width: 320
     height: 400
 
     ListModel {
-        id:categoriesListModel
+        id:minorListModel
 
         Component.onCompleted: {
-//            StoreDB.initializeTable("main_categories_table");
+//            StoreDB.initializeTable("emails_table");
 
-//            var items = new Array("emails_table" , "Emails");
-//            StoreDB.insertOrUpdateValue("main_categories_table" , items);
+//            var items = new Array("emails_table" , "163");
+//            StoreDB.insertOrUpdateValue("emails_table" , items);
 
-//            items[0] = "network_disk_table";
-//            items[1] = "Network Disk";
-//            StoreDB.insertOrUpdateValue("main_categories_table" , items);
+//            items[0] = "emails_table";
+//            items[1] = "Gmail";
+//            StoreDB.insertOrUpdateValue("emails_table" , items);
 
 //            items[0] = "websites_table";
 //            items[1] = "Websites";
 //            StoreDB.insertOrUpdateValue("main_categories_table" , items);
 
-            StoreDB.getTableAllValueAndAppendToModel("main_categories_table" , categoriesListModel);
+//            StoreDB.getTableAllValueAndAppendToModel("main_categories_table" , minorListModel);
+            StoreDB.getTableAllValueAndAppendToModel("emails_table" , minorListModel);
         }
     }
 
     Component {
-        id:categoriesDelegate
+        id:minorDelegate
 
 
         CategoriesItem {
-            id:categoriesItem
-            color: categoriesListView.currentIndex == index ? "orange" : "#2DB8B7"
+            id:minorItem
+            color: minorListView.currentIndex == index ? "orange" : "#2DB8B7"
 
             tableName: itemData0
             text: itemData1
@@ -51,23 +52,23 @@ Rectangle {
 //                hoverEnabled : true
                 anchors.fill: parent
                 onPressed:{
-                    categoriesListView.currentIndex = index;
+                    minorListView.currentIndex = index;
                 }
 
                 onReleased: {
-                    var object = Qt.createComponent("MinorCategories.qml").createObject(categoriesRectangle)
+
                 }
             }
         }
     }
 
     ListView {
-        id:categoriesListView
+        id:minorListView
 //        z: 0
         anchors.fill: parent
         spacing: 5
 
-        model: categoriesListModel
-        delegate: categoriesDelegate
+        model: minorListModel
+        delegate: minorDelegate
     }
 }

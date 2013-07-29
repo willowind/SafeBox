@@ -11,6 +11,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     viewer.setOrientation(QmlApplicationViewer::ScreenOrientationAuto);
 //    viewer.setMainQmlFile(QLatin1String("qml/SafeBox/StartEncryptionFace.qml"));
     viewer.setMainQmlFile(QLatin1String("qml/SafeBox/MainCategories.qml"));
+//    viewer.setMainQmlFile(QLatin1String("qml/SafeBox/MinorCategories.qml"));
     viewer.showExpanded();
 
     QDeclarativeEngine engine;
