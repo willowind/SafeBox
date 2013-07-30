@@ -34,6 +34,7 @@ Rectangle {
 
         CategoriesItem {
             id:categoriesItem
+            width: categoriesRectangle.width
             color: categoriesListView.currentIndex == index ? "orange" : "#2DB8B7"
 
             tableName: itemData0
@@ -48,7 +49,6 @@ Rectangle {
             data8: itemData9
 
             MouseArea {
-//                hoverEnabled : true
                 anchors.fill: parent
                 onPressed:{
                     categoriesListView.currentIndex = index;
@@ -63,11 +63,26 @@ Rectangle {
 
     ListView {
         id:categoriesListView
-//        z: 0
-        anchors.fill: parent
+        width: categoriesRectangle.width
+        height: categoriesRectangle.height - controlArea.height
+
+        anchors.top: categoriesRectangle.top
+        anchors.left: categoriesRectangle.left
+        anchors.right: categoriesRectangle.right
+
         spacing: 5
 
         model: categoriesListModel
         delegate: categoriesDelegate
+    }
+
+    ControlArea {
+        id:controlArea
+        width: categoriesRectangle.width
+        color: "red"
+
+        anchors.top: categoriesListView.bottom
+        anchors.left: categoriesRectangle.left
+        anchors.right: categoriesRectangle.right
     }
 }

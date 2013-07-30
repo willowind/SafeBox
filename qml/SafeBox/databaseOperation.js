@@ -65,55 +65,29 @@ function insertOrUpdateValue(table , tableItems) {
   return res;
 }
 
-function insertValueToDB(table) {
-
-}
-
- // 获取数据
-function getSetting(setting) {
-   var db = getDatabase();
-   var res="";
-   db.transaction(function(tx) {
-//     var rs = tx.executeSql('SELECT value FROM settings WHERE setting=?;', [setting]);
-       var rs = tx.executeSql('SELECT setting,value FROM settings;');
-     if (rs.rows.length > 0) {
-         console.log(rs.rows.length)
-         for(var i = 0 ; i < rs.rows.length ; i++)
-//         {
-//             console.log(rs.rows.item(i).setting);
-//             console.log(rs.rows.item(i).value);
-//         }
-             res += rs.rows.item(i).setting + " = " + rs.rows.item(i).value + "\n";
-     } else {
-         res = "Unknown";
-     }
-  })
-  return res
-}
 
 function getTableAllValueAndAppendToModel(table , model) {
     var db = getDatabase();
-    db.transaction(
-        function(tx) {
-//                    var tmpcmd = 'SELECT tableName,showTableName FROM {0};'
-                    var tmpcmd = 'SELECT * FROM {0};'
-                    var cmd = String.format(tmpcmd , table);
+    db.transaction(function(tx) {
+        var tmpcmd = 'SELECT * FROM {0};'
+        var cmd = String.format(tmpcmd , table);
+                       print(cmd);
         var rs = tx.executeSql(cmd);
         if (rs.rows.length > 0) {
             for(var i = 0 ; i < rs.rows.length ; i++)
             {
                 var myItem = rs.rows.item(i);
                 model.append({
-                                 "modelDataItem0" : myItem.item0,
-                                 "modelDataItem1" : myItem.item1,
-                                 "modelDataItem2" : myItem.item2,
-                                 "modelDataItem3" : myItem.item3,
-                                 "modelDataItem4" : myItem.item4,
-                                 "modelDataItem5" : myItem.item5,
-                                 "modelDataItem6" : myItem.item6,
-                                 "modelDataItem7" : myItem.item7,
-                                 "modelDataItem8" : myItem.item8,
-                                 "modelDataItem9" : myItem.item9,
+                                 "itemData0" : myItem.item0,
+                                 "itemData1" : myItem.item1,
+                                 "itemData2" : myItem.item2,
+                                 "itemData3" : myItem.item3,
+                                 "itemData4" : myItem.item4,
+                                 "itemData5" : myItem.item5,
+                                 "itemData6" : myItem.item6,
+                                 "itemData7" : myItem.item7,
+                                 "itemData8" : myItem.item8,
+                                 "itemData9" : myItem.item9,
                                });
             }
         }

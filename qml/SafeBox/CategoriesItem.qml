@@ -5,14 +5,15 @@ import QtQuick 1.1
 Rectangle {
     id:itemRectangle
     width: 300
-    height: 80
+    height: 60
     color: "#2DB8B7"
     border.color: "green"
     border.width: 2
 
     property alias text: showText.text
-    property alias image: icomImage
-    property alias color: itemRectangle.color
+    property alias iconImageSource: icomImage.source
+    property alias moreImageSource: moreIcomImage.source
+
 
     property string tableName: ""
     property string showName: showText.text
@@ -31,20 +32,31 @@ Rectangle {
 
     Image {
         id: icomImage
-        x: 7
-        y: 9
-        width: 53
-        height: 59
-//        source: "qrc:/qtquickplugin/images/template_image.png"
+        width: 40
+
+        anchors {
+            left: parent.left
+            top: parent.top
+            bottom: parent.bottom
+
+            leftMargin: 5
+            topMargin: 5
+            bottomMargin: 5
+        }
     }
 
     Text {
         id: showText
-        x: 66
-        y: 9
-        width: 174
-        height: 59
         text: qsTr("")
+
+        anchors {
+            left: icomImage.right
+            right: moreRectangle.left
+            top: parent.top
+            bottom: parent.bottom
+            leftMargin: 10
+        }
+
         verticalAlignment: Text.AlignVCenter
         horizontalAlignment: Text.AlignLeft
         font.pixelSize: 30
@@ -52,19 +64,23 @@ Rectangle {
 
     Rectangle {
         id: moreRectangle
-        x: 250
-        y: 9
-        width: 41
-        height: 59
+        width: 40
         color: "#A20013"
+
+        anchors {
+            top: parent.top
+            bottom: parent.bottom
+            right: parent.right
+
+            topMargin: 5
+            bottomMargin: 5
+            leftMargin: 10
+            rightMargin: 5
+        }
 
         Image {
             id: moreIcomImage
-            x: 7
-            y: 9
-            width: 41
-            height: 59
-//            source: "qrc:/qtquickplugin/images/template_image.png"
+            anchors.fill: parent
         }
     }
 }

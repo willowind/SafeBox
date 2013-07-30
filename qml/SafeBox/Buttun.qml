@@ -2,14 +2,20 @@
 import QtQuick 1.1
 
 Rectangle {
-    id: digitButtun
-    width: 80
+    id: buttun
+    width: 40
     height: 40
     color: "#1ABC9C"
 
     property alias text: digitText.text
+    property alias imageSource: image.source
 
     signal clicked()
+
+    Image {
+        id: image
+        anchors.fill: parent
+    }
 
     Text {
         id: digitText
@@ -26,6 +32,6 @@ Rectangle {
     MouseArea {
         id: mouse_area
         anchors.fill: parent
-        onClicked: digitButtun.clicked()
+        onClicked: buttun.clicked()
     }
 }
