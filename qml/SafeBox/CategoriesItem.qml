@@ -17,14 +17,9 @@ Rectangle {
 
     property string tableName: ""
     property string showName: showText.text
-    property string data1: ""
-    property string data2: ""
-    property string data3: ""
-    property string data4: ""
-    property string data5: ""
-    property string data6: ""
-    property string data7: ""
-    property string data8: ""
+
+    property variant datas: ["", "", "", "", "", "", "", ""]
+
 
     signal moreRectangleClicked()
     signal itemClicked()

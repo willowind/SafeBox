@@ -39,14 +39,19 @@ Rectangle {
 
             tableName: itemData0
             text: itemData1
-            data1: itemData2
-            data2: itemData3
-            data3: itemData4
-            data4: itemData5
-            data5: itemData6
-            data6: itemData7
-            data7: itemData8
-            data8: itemData9
+
+            Component.onCompleted: {
+                var tmp = datas
+                tmp[0] = itemData2
+                tmp[1] = itemData3
+                tmp[2] = itemData4
+                tmp[3] = itemData5
+                tmp[4] = itemData6
+                tmp[5] = itemData7
+                tmp[6] = itemData8
+                tmp[7] = itemData9
+                datas = tmp
+            }
 
             MouseArea {
                 anchors.fill: parent
@@ -56,6 +61,10 @@ Rectangle {
 
                 onReleased: {
                     var object = Qt.createComponent("MinorCategories.qml").createObject(categoriesRectangle)
+                    object.init(categoriesItem.tableName)
+                    object.width = categoriesRectangle.width
+                    object.height = categoriesRectangle.height
+                    object.titles = categoriesItem.datas
                 }
             }
         }
