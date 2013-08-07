@@ -11,7 +11,7 @@ Rectangle {
         id:categoriesListModel
 
         Component.onCompleted: {
-//            StoreDB.initializeTable("main_categories_table");
+            StoreDB.initializeTable("main_categories_table");
 
 //            var items = new Array("emails_table" , "Emails");
 //            StoreDB.insertOrUpdateValue("main_categories_table" , items);
@@ -93,5 +93,15 @@ Rectangle {
         anchors.top: categoriesListView.bottom
         anchors.left: categoriesRectangle.left
         anchors.right: categoriesRectangle.right
+
+        onCreateButtunClicked: {
+            var object = Qt.createComponent("AddModify.qml").createObject(categoriesRectangle)
+            object.width = categoriesRectangle.width
+            object.height = categoriesRectangle.height
+
+            var titles = new Array("Group Name" , "Field Name", "Field Name", "Field Name", "Field Name", "Field Name", "Field Name", "Field Name", "Field Name")
+            var values = new Array("Group Name" , "Field Name", "Field Name", "Field Name", "Field Name", "Field Name", "Field Name", "Field Name", "Field Name")
+            object.init(titles , values)
+        }
     }
 }

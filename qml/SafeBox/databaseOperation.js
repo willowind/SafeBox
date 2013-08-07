@@ -35,8 +35,8 @@ function insertOrUpdateValue(table , tableItems) {
    var db = getDatabase();
    var res = "";
    db.transaction(function(tx) {
-        var tmpcmd = 'INSERT OR REPLACE INTO {0} VALUES("{1}"';
-
+//        var tmpcmd = 'INSERT OR REPLACE INTO {0} VALUES("{1}"';
+        var tmpcmd = 'REPLACE INTO {0} VALUES("{1}"';
         var i;
         for(i in tableItems)
         {
@@ -54,6 +54,8 @@ function insertOrUpdateValue(table , tableItems) {
         tmpcmd += ");";
 
         var cmd = String.format(tmpcmd , table , tableItems[0]);
+
+        print(cmd)
 
         var rs = tx.executeSql(cmd);
         if (rs.rowsAffected > 0)

@@ -17,9 +17,9 @@ Rectangle {
         id:minorListModel
 
         Component.onCompleted: {
-//            StoreDB.initializeTable("emails_table");
+            StoreDB.initializeTable("emails_table");
 
-//            var items = new Array("emails_table" , "163");
+//            var items = new Array("emails_table" , "网易");
 //            StoreDB.insertOrUpdateValue("emails_table" , items);
 
 //            items[0] = "emails_table";

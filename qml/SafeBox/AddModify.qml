@@ -2,7 +2,8 @@
 import QtQuick 1.1
 
 Rectangle {
-    id: detailsRec
+    id: addModifyRec
+
     width: 320
     height: 400
 
@@ -11,10 +12,7 @@ Rectangle {
         {
             for(var i = 0 ; i < titles.length ; i++)
             {
-//                if(titles[i] == "NULL")
-//                    continue;
-
-                detailsListModel.append({
+                addModifyListModel.append({
                                             "showTitle" : titles[i],
                                             "showValue" : values[i],
                                         })
@@ -22,18 +20,19 @@ Rectangle {
         }
     }
 
+
     ListModel {
-        id: detailsListModel
+        id: addModifyListModel
     }
 
     Component {
-        id: detailsDelegate
+        id: addModifyDelegate
 
-        DetailsItem {
+        AddModifyItem {
             id: item
 
-            width: detailsRec.width
-            color: detailsListView.currentIndex == index ? "orange" : "#2DB8B7"
+            width: addModifyRec.width
+            color: addModifyListView.currentIndex == index ? "orange" : "#2DB8B7"
 
             title: showTitle
             value: showValue
@@ -42,7 +41,7 @@ Rectangle {
 //                hoverEnabled : true
                 anchors.fill: parent
                 onPressed:{
-                    detailsListView.currentIndex = index;
+                    addModifyListView.currentIndex = index;
                 }
 
                 onReleased: {
@@ -53,32 +52,32 @@ Rectangle {
     }
 
     ListView {
-        id: detailsListView
+        id: addModifyListView
 
         spacing: 10
 
 //        z: 0
 
-        width: detailsRec.width
-        height: detailsRec.height - controlArea.height
+        width: addModifyRec.width
+        height: addModifyRec.height - controlArea.height
 
-        anchors.top: detailsRec.top
-        anchors.left: detailsRec.left
-        anchors.right: detailsRec.right
+        anchors.top: addModifyRec.top
+        anchors.left: addModifyRec.left
+        anchors.right: addModifyRec.right
 
-        model: detailsListModel
-        delegate: detailsDelegate
+        model: addModifyListModel
+        delegate: addModifyDelegate
     }
 
     ControlArea {
         id:controlArea
-        width: detailsRec.width
+        width: addModifyRec.width
         color: "red"
 
-        anchors.top: detailsListView.bottom
-        anchors.left: detailsRec.left
-        anchors.right: detailsRec.right
+        anchors.top: addModifyListView.bottom
+        anchors.left: addModifyRec.left
+        anchors.right: addModifyRec.right
 
-        onReturnButtunClicked: detailsRec.destroy()
+        onReturnButtunClicked: addModifyRec.destroy()
     }
 }
