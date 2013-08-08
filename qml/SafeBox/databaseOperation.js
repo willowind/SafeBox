@@ -1,5 +1,6 @@
 //storage.js
 
+//简单格式化输出字符串
 String.format = function(src){
     if (arguments.length == 0)
         return null;
@@ -10,19 +11,19 @@ String.format = function(src){
     });
 };
 
-// 首先创建一个helper方法连接数据库
+//打开数据库
 function getDatabase() {
      return openDatabaseSync("SafeBox.db", "1.0", "StorageDatabase", 100000);
 }
 
-// 程序打开时，初始化表
+//初始化表
 function initializeTable(table) {
     var db = getDatabase();
     db.transaction(
         function(tx) {
             // 如果main_categories_table表不存在，则创建一个
             // 如果表存在，则跳过此步
-            var tmpCMD = "CREATE TABLE IF NOT EXISTS {0}(item0 TEXT , item1 TEXT , item2 TEXT , item3 TEXT , item4 TEXT , item5 TEXT , item6 TEXT , item7 TEXT , item8 TEXT , item9 TEXT);";
+            var tmpCMD = "CREATE TABLE IF NOT EXISTS {0}(item0 TEXT , item1 TEXT PRIMARY KEY , item2 TEXT , item3 TEXT , item4 TEXT , item5 TEXT , item6 TEXT , item7 TEXT , item8 TEXT , item9 TEXT , UNIQUE(item1));";
 
             var cmd = String.format(tmpCMD , table);
 
@@ -30,13 +31,12 @@ function initializeTable(table) {
       });
 }
 
-// 插入数据
+// 插入或更新数据
 function insertOrUpdateValue(table , tableItems) {
    var db = getDatabase();
    var res = "";
    db.transaction(function(tx) {
-//        var tmpcmd = 'INSERT OR REPLACE INTO {0} VALUES("{1}"';
-        var tmpcmd = 'REPLACE INTO {0} VALUES("{1}"';
+        var tmpcmd = 'INSERT OR REPLACE INTO {0} VALUES("{1}"';
         var i;
         for(i in tableItems)
         {
@@ -67,7 +67,7 @@ function insertOrUpdateValue(table , tableItems) {
   return res;
 }
 
-
+//获取数据库中的所以数据，并将数据添加到model中
 function getTableAllValueAndAppendToModel(table , model) {
     var db = getDatabase();
     db.transaction(function(tx) {
@@ -76,6 +76,7 @@ function getTableAllValueAndAppendToModel(table , model) {
                        print(cmd);
         var rs = tx.executeSql(cmd);
         if (rs.rows.length > 0) {
+            model.clear();
             for(var i = 0 ; i < rs.rows.length ; i++)
             {
                 var myItem = rs.rows.item(i);
