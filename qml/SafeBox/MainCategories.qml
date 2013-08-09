@@ -13,16 +13,16 @@ Rectangle {
         Component.onCompleted: {
             StoreDB.initializeTable("main_categories_table");
 
-//            var items = new Array("emails_table" , "Emails");
-//            StoreDB.insertOrUpdateValue("main_categories_table" , items);
+            var items = new Array("emails_table" , "Emails");
+            StoreDB.insertOrUpdateValue("main_categories_table" , items);
 
-//            items[0] = "network_disk_table";
-//            items[1] = "Network Disk";
-//            StoreDB.insertOrUpdateValue("main_categories_table" , items);
+            items[0] = "network_disk_table";
+            items[1] = "Network Disk";
+            StoreDB.insertOrUpdateValue("main_categories_table" , items);
 
-//            items[0] = "websites_table";
-//            items[1] = "Websites";
-//            StoreDB.insertOrUpdateValue("main_categories_table" , items);
+            items[0] = "websites_table";
+            items[1] = "Websites";
+            StoreDB.insertOrUpdateValue("main_categories_table" , items);
 
             StoreDB.getTableAllValueAndAppendToModel("main_categories_table" , categoriesListModel);
         }

@@ -37,24 +37,14 @@ Rectangle {
             title: showTitle
             value: showValue
 
-            MouseArea {
-//                hoverEnabled : true
-                anchors.fill: parent
-                onPressed:{
-                    addModifyListView.currentIndex = index;
-                }
-
-                onReleased: {
-
-                }
-            }
+            onFocusChanged: addModifyListView.currentIndex = index;
         }
     }
 
     ListView {
         id: addModifyListView
 
-        spacing: 10
+        spacing: 5
 
 //        z: 0
 

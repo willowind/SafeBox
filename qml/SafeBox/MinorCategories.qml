@@ -19,12 +19,12 @@ Rectangle {
         Component.onCompleted: {
             StoreDB.initializeTable("emails_table");
 
-//            var items = new Array("emails_table" , "网易");
-//            StoreDB.insertOrUpdateValue("emails_table" , items);
+            var items = new Array("emails_table" , "网易");
+            StoreDB.insertOrUpdateValue("emails_table" , items);
 
-//            items[0] = "emails_table";
-//            items[1] = "Gmail";
-//            StoreDB.insertOrUpdateValue("emails_table" , items);
+            items[0] = "emails_table";
+            items[1] = "Gmail";
+            StoreDB.insertOrUpdateValue("emails_table" , items);
 
 //            items[0] = "websites_table";
 //            items[1] = "Websites";
