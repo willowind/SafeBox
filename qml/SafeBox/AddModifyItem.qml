@@ -10,6 +10,7 @@ Rectangle {
     property alias value: valueInput.text
 
     signal focusChanged()
+    signal accepteData()
 
     Text {
         id: nameText
@@ -48,21 +49,65 @@ Rectangle {
             bottomMargin: 5
         }
 
-        TextInput
-        {
-            id:valueInput
-            width: valueRec.width
-            height: valueRec.height / 2
+        Item {
+            id: valueItem
 
-            font.pixelSize: 20
-            color:"black"
-            text: "test"
-            horizontalAlignment: TextInput.AlignLeft
-            anchors.verticalCenter: parent.verticalCenter
-            anchors.leftMargin: 5
+            anchors {
+                left: valueRec.left
+                right: valueRec.right
+                top: valueRec.top
+                bottom: valueRec.bottom
 
-            onActiveFocusChanged: addModifyItemRec.focusChanged()
+                leftMargin: 10
+            }
+
+            TextInput
+            {
+                id:valueInput
+                width: valueRec.width
+                height: valueRec.height / 2
+
+                horizontalAlignment: TextInput.AlignLeft
+                anchors.verticalCenter: parent.verticalCenter
+
+                smooth: true
+                autoScroll: true
+
+                font.pixelSize: 20
+
+                onAccepted: addModifyItemRec.accepteData()
+                onActiveFocusChanged: addModifyItemRec.focusChanged()
+            }
+
+            Text {
+                id: defaultText
+                text: qsTr("NULL")
+
+                anchors.fill: valueInput
+                font {
+                    pixelSize: valueInput.font.pixelSize
+                    italic: true
+                }
+
+                states: [
+                    State {
+                        name: "hasText"
+                        when: valueInput.text != ""
+                        PropertyChanges {
+                            target: defaultText
+                            opacity: 0
+                        }
+                    },
+                    State {
+                        name: ""
+                        when: valueInput.text == ""
+                        PropertyChanges {
+                            target: defaultText
+                            opacity: 1
+                        }
+                    }
+                ]
+            }
         }
     }
-
 }

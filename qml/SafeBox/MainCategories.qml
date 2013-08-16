@@ -7,25 +7,15 @@ Rectangle {
     width: 320
     height: 400
 
+    function loadAllData() {
+        StoreDB.initializeTable("main_categories_table");
+        StoreDB.getTableAllValueAndAppendToModel("main_categories_table" , categoriesListModel);
+    }
+
     ListModel {
         id:categoriesListModel
 
-        Component.onCompleted: {
-            StoreDB.initializeTable("main_categories_table");
-
-            var items = new Array("emails_table" , "Emails");
-            StoreDB.insertOrUpdateValue("main_categories_table" , items);
-
-            items[0] = "network_disk_table";
-            items[1] = "Network Disk";
-            StoreDB.insertOrUpdateValue("main_categories_table" , items);
-
-            items[0] = "websites_table";
-            items[1] = "Websites";
-            StoreDB.insertOrUpdateValue("main_categories_table" , items);
-
-            StoreDB.getTableAllValueAndAppendToModel("main_categories_table" , categoriesListModel);
-        }
+        Component.onCompleted: loadAllData();
     }
 
     Component {
@@ -95,13 +85,15 @@ Rectangle {
         anchors.right: categoriesRectangle.right
 
         onCreateButtunClicked: {
-            var object = Qt.createComponent("AddModify.qml").createObject(categoriesRectangle)
-            object.width = categoriesRectangle.width
-            object.height = categoriesRectangle.height
+            var addModify = Qt.createComponent("AddModify.qml").createObject(categoriesRectangle)
+            addModify.width = categoriesRectangle.width
+            addModify.height = categoriesRectangle.height
 
             var titles = new Array("Group Name" , "Field Name", "Field Name", "Field Name", "Field Name", "Field Name", "Field Name", "Field Name", "Field Name")
-            var values = new Array("Group Name" , "Field Name", "Field Name", "Field Name", "Field Name", "Field Name", "Field Name", "Field Name", "Field Name")
-            object.init(titles , values)
+            var values = new Array("" , "", "", "", "", "", "", "", "")
+            addModify.init(titles , values)
+
+            addModify.pageDestroyed.connect(categoriesRectangle.loadAllData)
         }
     }
 }

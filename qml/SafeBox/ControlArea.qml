@@ -13,6 +13,7 @@ Rectangle {
     signal moreButtunClicked()
 
     Row {
+        id: controlRow
         x: 10
         y: 10
         width: controlArea.width
@@ -45,4 +46,54 @@ Rectangle {
             onClicked: controlArea.moreButtunClicked()
         }
     }
+
+    states: [
+        State {
+            name: "creatState"
+            PropertyChanges {
+                target: controlRow
+                spacing: (controlArea.width - 3*returnButtun.width) / 2
+            }
+            PropertyChanges {
+                target: createButtun
+                width: returnButtun.width * 2
+            }
+            PropertyChanges {
+                target: deleteButtun
+                opacity: 0
+            }
+            PropertyChanges {
+                target: modifyButtun
+                opacity: 0
+            }
+            PropertyChanges {
+                target: moreButtun
+                opacity: 0
+            }
+        },
+        State {
+            name: ""
+            PropertyChanges {
+                target: controlRow
+                spacing: (controlArea.width - 5*returnButtun.width) / 5
+            }
+            PropertyChanges {
+                target: createButtun
+                width: returnButtun.width
+            }
+            PropertyChanges {
+                target: deleteButtun
+                opacity: 1
+            }
+            PropertyChanges {
+                target: modifyButtun
+                opacity: 1
+            }
+            PropertyChanges {
+                target: moreButtun
+                opacity: 1
+            }
+        }
+    ]
+
 }
