@@ -6,18 +6,16 @@ Rectangle {
     width: 320
     height: 400
 
-    function init(titles , values) {
+    function init(titles , values , offset) {
         if(titles.length == values.length)
         {
-            for(var i = 0 ; i < titles.length ; i++)
+            for(var i = offset ; i < titles.length ; i++)
             {
-//                if(titles[i] == "NULL")
-//                    continue;
-
-                detailsListModel.append({
+                if(titles[i].length != 0)
+                    detailsListModel.append({
                                             "showTitle" : titles[i],
                                             "showValue" : values[i],
-                                        })
+                                            })
             }
         }
     }

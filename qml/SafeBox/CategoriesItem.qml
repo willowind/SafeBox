@@ -18,7 +18,7 @@ Rectangle {
     property string tableName: ""
     property string showName: showText.text
 
-    property variant datas: ["", "", "", "", "", "", "", ""]
+    property variant datas: ["", "", "", "", "", "", "", "", "", ""]
 
 
     signal moreRectangleClicked()

@@ -49,7 +49,7 @@ function insertOrUpdateValue(table , tableItems) {
         }
 
         for(i++; i < 10 ; i++)
-            tmpcmd += ' , "NULL"';
+            tmpcmd += ' , ""';
 
         tmpcmd += ");";
 

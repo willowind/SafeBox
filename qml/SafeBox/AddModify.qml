@@ -10,18 +10,30 @@ Rectangle {
 
     signal pageDestroyed()
 
+    property string tableName: ""
+    property string showName: ""
+    property string controlAreaState: ""
+
     //填充model中的数据项
-    function init(titles , values) {
-        if(titles.length == values.length)
+    function init(titles , values , offset) {
+        if((titles.length == values.length) && (values.length) >= 2)
         {
-            for(var i = 0 ; i < titles.length ; i++)
+            tableName = values[0];
+            showName = values[1]
+            for(var i = offset ; i < titles.length ; i++)
             {
-                addModifyListModel.append({
+                if(titles[i].length != 0)
+                    addModifyListModel.append({
                                             "showTitle" : titles[i],
                                             "showValue" : values[i],
-                                        })
+                                            })
             }
         }
+    }
+
+    function pageDestroyedAndReturn() {
+        addModifyRec.pageDestroyed()    //触发页面销毁信号
+        addModifyRec.destroy()  //返回
     }
 
     //////////////////////////////////////////////////////////////
@@ -75,25 +87,22 @@ Rectangle {
         id:controlArea
         width: addModifyRec.width
         color: "red"
-        state: "creatState"
+        state: controlAreaState
 
         anchors.top: addModifyListView.bottom
         anchors.left: addModifyRec.left
         anchors.right: addModifyRec.right
 
-        onReturnButtunClicked: {
-            addModifyRec.pageDestroyed()    //触发页面销毁信号
-            addModifyRec.destroy() //返回
-        }
+        onReturnButtunClicked: pageDestroyedAndReturn()
 
-        //创建新表处理
+        //创建新类别表处理
         onCreateButtunClicked: {
-
             var items = new Array();
             items[0] = addModifyListModel.get(0).showValue.concat("_table");
+            items[1] = addModifyListModel.get(0).showValue;
 
             var index;
-            for(index = 0 ; index < addModifyListModel.count ; index++)
+            for(index = 1 ; index < addModifyListModel.count ; index++)
             {
                 var item = addModifyListModel.get(index);
                 items[index + 1] = item.showValue;
@@ -101,12 +110,44 @@ Rectangle {
 
             if(items[1] != "" && items[1] != "NULL")
             {
-                StoreDB.initializeTable("main_categories_table");
-                StoreDB.insertOrUpdateValue("main_categories_table" , items);
+                console.log(tableName)
+                StoreDB.initializeTable(tableName);
+                StoreDB.insertOrUpdateValue(tableName , items);
             }
 
-            addModifyRec.pageDestroyed()    //触发页面销毁信号
-            addModifyRec.destroy()  //返回
+            pageDestroyedAndReturn()
+        }
+
+        //创建已存在类别新项，或更改存在类别新项
+        onModifyButtunClicked: {
+            var items = new Array();
+            items[0] = tableName;
+
+            var offset;
+            if(showName.length != 0)
+            {
+                items[1] = showName;
+                offset = 2;
+            }
+            else
+                offset = 1
+
+            console.log(showName.length)
+
+            var index;
+            for(index = 0 ; index < addModifyListModel.count ; index++)
+            {
+                var item = addModifyListModel.get(index);
+                items[index + offset] = item.showValue;
+            }
+
+            if(items[1].length != 0)
+            {
+                StoreDB.initializeTable(tableName);
+                StoreDB.insertOrUpdateValue(tableName , items);
+            }
+
+            pageDestroyedAndReturn()
         }
     }
 }

@@ -72,6 +72,29 @@ Rectangle {
             }
         },
         State {
+            name: "modifyState"
+            PropertyChanges {
+                target: controlRow
+                spacing: (controlArea.width - 3*returnButtun.width) / 2
+            }
+            PropertyChanges {
+                target: modifyButtun
+                width: returnButtun.width * 2
+            }
+            PropertyChanges {
+                target: createButtun
+                opacity: 0
+            }
+            PropertyChanges {
+                target: deleteButtun
+                opacity: 0
+            }
+            PropertyChanges {
+                target: moreButtun
+                opacity: 0
+            }
+        },
+        State {
             name: ""
             PropertyChanges {
                 target: controlRow
@@ -94,6 +117,7 @@ Rectangle {
                 opacity: 1
             }
         }
+
     ]
 
 }
