@@ -33,6 +33,7 @@ Rectangle {
 
         Buttun {
             id: deleteButtun
+            imageSource: "trash.png"
             onClicked: controlArea.deleteButtunClicked()
         }
 

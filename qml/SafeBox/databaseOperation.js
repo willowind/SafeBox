@@ -67,6 +67,33 @@ function insertOrUpdateValue(table , tableItems) {
   return res;
 }
 
+//删除表中数据项
+function deleteTableItem(table , item) {
+    var db = getDatabase();
+    db.transaction(function(tx) {
+         var tmpcmd = 'DELETE FROM {0} WHERE item1 = "{1}"'
+         var cmd = String.format(tmpcmd , table , item);
+
+         tx.executeSql(cmd);
+         }
+   );
+}
+
+//销毁表
+function dropTable(table) {
+    var db = getDatabase();
+    db.transaction(function(tx) {
+         var tmpcmd = 'DROP TABLE {0}'
+         var cmd = String.format(tmpcmd , table);
+
+         tx.executeSql(cmd);
+         }
+   );
+}
+
+
+
+
 //获取数据库中的所以数据，并将数据添加到model中
 function getTableAllValueAndAppendToModel(table , model) {
     var db = getDatabase();

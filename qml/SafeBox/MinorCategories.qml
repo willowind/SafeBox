@@ -10,7 +10,6 @@ Rectangle {
     property variant titles: ["", "", "", "", "", "", "", "", "", ""]
 
     function loadAllData() {
-        console.log(titles[0])
         StoreDB.initializeTable(titles[0]);
         StoreDB.getTableAllValueAndAppendToModel(titles[0] , minorListModel);
     }
@@ -116,5 +115,10 @@ Rectangle {
         onCreateButtunClicked: minorRectangle.creatAddModifyPage(1)
 
         onModifyButtunClicked: minorRectangle.creatAddModifyPage(2)
+
+        onDeleteButtunClicked: {
+            StoreDB.deleteTableItem(titles[0] , minorListView.currentItem.datas[1]);
+            minorRectangle.loadAllData();
+        }
     }
 }

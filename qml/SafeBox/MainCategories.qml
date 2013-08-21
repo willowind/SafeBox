@@ -7,9 +7,11 @@ Rectangle {
     width: 320
     height: 400
 
+    property string mainTableName: "main_categories_table"
+
     function loadAllData() {
-        StoreDB.initializeTable("main_categories_table");
-        StoreDB.getTableAllValueAndAppendToModel("main_categories_table" , categoriesListModel);
+        StoreDB.initializeTable(mainTableName);
+        StoreDB.getTableAllValueAndAppendToModel(mainTableName , categoriesListModel);
     }
 
     function creatAddModifyPage(values) {
@@ -113,6 +115,13 @@ Rectangle {
         onModifyButtunClicked: {
             var value = categoriesListView.currentItem.datas;
             categoriesRectangle.creatAddModifyPage(value);
+        }
+
+        onDeleteButtunClicked: {
+            var item = categoriesListView.currentItem.datas
+            StoreDB.deleteTableItem(mainTableName , item[1]);
+            StoreDB.dropTable(item[0]);
+            categoriesRectangle.loadAllData();
         }
     }
 }
