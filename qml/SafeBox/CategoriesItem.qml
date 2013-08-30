@@ -6,13 +6,10 @@ Rectangle {
     id:itemRectangle
     width: 300
     height: 60
-    color: "#2DB8B7"
-    border.color: "green"
-    border.width: 2
 
     property alias text: showText.text
     property alias iconImageSource: icomImage.source
-    property alias moreImageSource: moreIcomImage.source
+    property alias moreRecColor: moreRectangle.color
 
 
     property string tableName: ""
@@ -20,10 +17,15 @@ Rectangle {
 
     property variant datas: ["", "", "", "", "", "", "", "", "", ""]
 
-
     signal moreRectangleClicked()
     signal itemClicked()
 
+
+    MouseArea {
+        id: itemMouse
+        anchors.fill: parent
+        onClicked: itemRectangle.itemClicked()
+    }
 
     Image {
         id: icomImage
@@ -33,16 +35,13 @@ Rectangle {
             left: parent.left
             top: parent.top
             bottom: parent.bottom
-
-            leftMargin: 5
-            topMargin: 5
-            bottomMargin: 5
         }
     }
 
     Text {
         id: showText
         text: qsTr("")
+        color: "white"
 
         anchors {
             left: icomImage.right
@@ -59,23 +58,28 @@ Rectangle {
 
     Rectangle {
         id: moreRectangle
-        width: 40
-        color: "#A20013"
+        width: itemRectangle.height
+        color: itemRectangle.color
 
         anchors {
             top: parent.top
             bottom: parent.bottom
             right: parent.right
-
-            topMargin: 5
-            bottomMargin: 5
-            leftMargin: 10
-            rightMargin: 5
         }
 
         Image {
             id: moreIcomImage
             anchors.fill: parent
+        }
+
+        MouseArea {
+            id: moreMouse
+            anchors.fill: parent
+            onPressed: moreRectangle.color = "#00529c"
+            onReleased: {
+//                moreRectangle.color = "#2c69a0"
+                itemRectangle.moreRectangleClicked()
+            }
         }
     }
 }

@@ -18,32 +18,58 @@ Rectangle {
         y: 10
         width: controlArea.width
         height: controlArea.height
-        spacing: (controlArea.width - 5*returnButtun.width) / 5
+//        spacing: (controlArea.width - 5*returnButtun.width) / 5
+        spacing: 0
+        anchors.fill: parent
 
         Buttun {
             id: returnButtun
-            onClicked: controlArea.returnButtunClicked()
+            anchors {
+                top: controlRow.top
+                bottom: controlRow.bottom
+            }
 
+            onClicked: controlArea.returnButtunClicked()
         }
 
         Buttun {
             id: createButtun
+            anchors {
+                top: controlRow.top
+                bottom: controlRow.bottom
+            }
+
             onClicked: controlArea.createButtunClicked()
         }
 
         Buttun {
             id: deleteButtun
-            imageSource: "trash.png"
+//            imageSource: "trash.png"
+            anchors {
+                top: controlRow.top
+                bottom: controlRow.bottom
+            }
+
             onClicked: controlArea.deleteButtunClicked()
         }
 
         Buttun {
             id: modifyButtun
+            anchors {
+                top: controlRow.top
+                bottom: controlRow.bottom
+            }
+
             onClicked: controlArea.modifyButtunClicked()
         }
 
         Buttun {
             id: moreButtun
+            anchors {
+                top: controlRow.top
+                bottom: controlRow.bottom
+            }
+
             onClicked: controlArea.moreButtunClicked()
         }
     }
@@ -96,26 +122,36 @@ Rectangle {
             }
         },
         State {
-            name: ""
+            name: "default"
             PropertyChanges {
-                target: controlRow
-                spacing: (controlArea.width - 5*returnButtun.width) / 5
+                target: returnButtun
+                color: "#0d0c0c"
+                width: controlArea.width / 5
             }
             PropertyChanges {
                 target: createButtun
-                width: returnButtun.width
+                color: "#7fa8cd"
+                width: controlArea.width / 5
             }
             PropertyChanges {
                 target: deleteButtun
                 opacity: 1
+//                color: "#ccdceb"
+                color: "#2c69a0"
+                width: controlArea.width / 5
             }
             PropertyChanges {
                 target: modifyButtun
                 opacity: 1
+//                color: "#00529c"
+                color: "#004786"
+                width: controlArea.width / 5
             }
             PropertyChanges {
                 target: moreButtun
                 opacity: 1
+                color: "#0d0c0c"
+                width: controlArea.width / 5
             }
         }
 

@@ -6,8 +6,16 @@ Rectangle {
     id:categoriesRectangle
     width: 320
     height: 400
+//    color: "#00529c" //100%
+    color: "#7fa8cd" //50%
+//    color: "#ccdceb"    //20%
+
+//        color: "#00b16a" //100%
+//        color: "#7fd8b4" //50%
+//        color: "#ccefe1"    //20%
 
     property string mainTableName: "main_categories_table"
+    property int preIndex: 0
 
     function loadAllData() {
         StoreDB.initializeTable(mainTableName);
@@ -43,7 +51,8 @@ Rectangle {
         CategoriesItem {
             id:categoriesItem
             width: categoriesRectangle.width
-            color: categoriesListView.currentIndex == index ? "orange" : "#2DB8B7"
+            color: categoriesListView.currentIndex == index ? "#2c69a0" : "#7fa8cd"
+            moreRecColor: categoriesListView.currentIndex == index ? "#2c69a0" : "#7fa8cd"
 
             tableName: itemData0
             text: itemData1
@@ -63,19 +72,15 @@ Rectangle {
                 datas = tmp
             }
 
-            MouseArea {
-                anchors.fill: parent
-                onPressed:{
-                    categoriesListView.currentIndex = index;
-                }
-
-                onReleased: {
-                    var object = Qt.createComponent("MinorCategories.qml").createObject(categoriesRectangle)
-                    object.width = categoriesRectangle.width
-                    object.height = categoriesRectangle.height
-                    object.titles = categoriesItem.datas
-                    object.loadAllData()
-                }
+            onItemClicked: categoriesListView.currentIndex = index
+            onMoreRectangleClicked: {
+                categoriesListView.currentIndex = index
+                var object = Qt.createComponent("MinorCategories.qml").createObject(categoriesRectangle)
+                object.width = categoriesRectangle.width
+                object.height = categoriesRectangle.height
+                object.titles = categoriesItem.datas
+                object.loadAllData()
+                categoriesListView.currentIndex = index
             }
         }
     }
@@ -91,7 +96,7 @@ Rectangle {
         anchors.left: categoriesRectangle.left
         anchors.right: categoriesRectangle.right
 
-        spacing: 5
+        spacing: 0
 
         model: categoriesListModel
         delegate: categoriesDelegate
@@ -101,7 +106,10 @@ Rectangle {
     ControlArea {
         id:controlArea
         width: categoriesRectangle.width
-        color: "red"
+//        color: "#7fa8cd" //50%
+//        color: "red"
+
+        state: "default"
 
         anchors.top: categoriesListView.bottom
         anchors.left: categoriesRectangle.left
