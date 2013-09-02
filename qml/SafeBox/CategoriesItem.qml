@@ -24,7 +24,8 @@ Rectangle {
     MouseArea {
         id: itemMouse
         anchors.fill: parent
-        onClicked: itemRectangle.itemClicked()
+        onPressed: itemRectangle.itemClicked()
+        onDoubleClicked: itemRectangle.moreRectangleClicked()
     }
 
     Image {
@@ -69,17 +70,20 @@ Rectangle {
 
         Image {
             id: moreIcomImage
+            source: "more.png"
             anchors.fill: parent
+            smooth: true
+            fillMode: Image.PreserveAspectFit
         }
 
-        MouseArea {
-            id: moreMouse
-            anchors.fill: parent
-            onPressed: moreRectangle.color = "#00529c"
-            onReleased: {
-//                moreRectangle.color = "#2c69a0"
-                itemRectangle.moreRectangleClicked()
-            }
-        }
+//        MouseArea {
+//            id: moreMouse
+//            anchors.fill: parent
+//            onPressed: moreRectangle.color = "#00529c"
+//            onReleased: {
+////                moreRectangle.color = "#2c69a0"
+//                itemRectangle.moreRectangleClicked()
+//            }
+//        }
     }
 }

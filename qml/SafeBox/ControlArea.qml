@@ -4,7 +4,7 @@ import QtQuick 1.1
 Rectangle {
     id: controlArea
     width: 260
-    height: 60
+    height: 96
 
     signal returnButtunClicked()
     signal createButtunClicked()
@@ -18,7 +18,6 @@ Rectangle {
         y: 10
         width: controlArea.width
         height: controlArea.height
-//        spacing: (controlArea.width - 5*returnButtun.width) / 5
         spacing: 0
         anchors.fill: parent
 
@@ -122,7 +121,7 @@ Rectangle {
             }
         },
         State {
-            name: "default"
+            name: "mainState"
             PropertyChanges {
                 target: returnButtun
                 color: "#0d0c0c"
@@ -135,21 +134,18 @@ Rectangle {
             }
             PropertyChanges {
                 target: deleteButtun
-                opacity: 1
 //                color: "#ccdceb"
                 color: "#2c69a0"
                 width: controlArea.width / 5
             }
             PropertyChanges {
                 target: modifyButtun
-                opacity: 1
 //                color: "#00529c"
                 color: "#004786"
                 width: controlArea.width / 5
             }
             PropertyChanges {
                 target: moreButtun
-                opacity: 1
                 color: "#0d0c0c"
                 width: controlArea.width / 5
             }

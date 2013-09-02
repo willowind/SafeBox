@@ -4,8 +4,8 @@ import "databaseOperation.js" as StoreDB
 
 Rectangle {
     id:categoriesRectangle
-    width: 320
-    height: 400
+    width: 855
+    height: 480
 //    color: "#00529c" //100%
     color: "#7fa8cd" //50%
 //    color: "#ccdceb"    //20%
@@ -109,7 +109,7 @@ Rectangle {
 //        color: "#7fa8cd" //50%
 //        color: "red"
 
-        state: "default"
+        state: "mainState"
 
         anchors.top: categoriesListView.bottom
         anchors.left: categoriesRectangle.left

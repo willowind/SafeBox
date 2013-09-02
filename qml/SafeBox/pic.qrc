@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file>trash.png</file>
+        <file>more.png</file>
     </qresource>
 </RCC>
